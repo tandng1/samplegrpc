@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService1";
+
+package patient;
+service Patient{
+	rpc SelectAll (Empty) returns (PatientModels);
+	rpc SelectByID (PatientFilter) returns (PatientModel);
+	rpc Insert (PatientModel) returns (Empty);
+	rpc Update (PatientModel) returns (Empty);
+	rpc Delete (PatientFilter) returns (Empty);
+}
+message Empty {
+
+}
+
+message PatientModel {
+  string patientID = 1;
+  string firstName = 2;
+  string lastName = 3;
+}
+
+message PatientModels
+{
+   repeated PatientModel items = 1;
+}
+message PatientFilter
+{
+   string patientID = 1;
+}
